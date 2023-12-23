@@ -1,5 +1,7 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import { DestinationContext } from '@/app/context/DestinationContext';
+import { SourceContext } from '@/app/context/SourceContext';
+import React, { useContext, useEffect, useState } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
@@ -8,6 +10,8 @@ const InputItem = ({ type }) => {
     
     const [value, setValue] = useState(null);
     const [placeholder, setPlaceholder] = useState(null);
+    const { source, setSource } = useContext(SourceContext);
+    const { destination, setDestination } = useContext(DestinationContext);
     
     useEffect(() => {
         type == 'source' ? setPlaceholder('Pickup Loacation') : setPlaceholder('Dropoff Location');
@@ -20,7 +24,22 @@ const InputItem = ({ type }) => {
         service.getDetails({ placeId }, (place, status) => {
           if (status == "OK" && place.geometry && place.geometry.location) {
               console.log(place.geometry.location.lat());
-              console.log(place.geometry.location.lng());
+              if (type == 'source') {
+                  setSource({
+                      lat: place.geometry.location.lat(),
+                      lng: place.geometry.location.lng(),
+                      name: place.formatted_address,
+                      label:place.name
+                  });
+              } else { 
+                  setDestination({
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng(),
+                    name: place.formatted_address,
+                    label: place.name
+                  });
+              }
+              
           }
         });
     };
