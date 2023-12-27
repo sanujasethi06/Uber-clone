@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { DestinationContext } from "@/app/context/DestinationContext";
 import { SourceContext } from "@/app/context/SourceContext";
 import { useContext } from 'react';
-import { GoogleMap, MarkerF, OverlayView, useJsApiLoader } from "@react-google-maps/api";
+import { DirectionsRenderer, GoogleMap, MarkerF, OverlayView, useJsApiLoader } from "@react-google-maps/api";
 
 const GoogleMapSection = () => {
 
@@ -18,6 +18,8 @@ const GoogleMapSection = () => {
     lat: -3.745,
     lng: -38.523,
   });
+
+  const [directionRoutePoints,setDirectionRoutePoints]= useState([])
   useEffect(() => {
     if (source?.length!=[] && map)
     {
@@ -29,7 +31,10 @@ const GoogleMapSection = () => {
         lat: source.lat,
         lng: source.lng
       });
-      }
+    }
+    if (source.length != [] && destination.length != []) {
+      directionRoute()
+    }
     
   }, [source]);
    useEffect(() => {
@@ -44,8 +49,26 @@ const GoogleMapSection = () => {
          lng: destination.lng,
        });
      }
+     if (source.length != [] && destination.length != []) {
+       directionRoute();
+     }
    }, [destination]);
 
+  const directionRoute = () => { 
+    const DirectionService = new google.maps.DirectionsService();
+
+    DirectionService.route({
+      origin: { lat: source.lat, lng: source.lng },
+      destination: { lat: destination.lat, lng: destination.lng },
+      travelMode:google.maps.TravelMode.DRIVING
+    }, (result, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        setDirectionRoutePoints(result)
+      } else {
+        console.error("Error")
+      }
+    });
+  }
   // const { isLoaded } = useJsApiLoader({
   //   id: "google-map-script",
   //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
@@ -116,6 +139,18 @@ const GoogleMapSection = () => {
           </OverlayView>
         </MarkerF>
       ) : null}
+
+      <DirectionsRenderer directions={directionRoutePoints}
+        options={{
+          polylineOptions: {
+            strokeColor: '#000',
+            strokeWeight:5
+            
+          },
+        suppressMarkers: true,
+      }}>
+
+      </DirectionsRenderer>
       {/* Child components, such as markers, info windows, etc. */}
       <></>
     </GoogleMap>
