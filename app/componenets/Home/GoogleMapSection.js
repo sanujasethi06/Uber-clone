@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { DestinationContext } from "@/app/context/DestinationContext";
 import { SourceContext } from "@/app/context/SourceContext";
 import { useContext } from 'react';
-import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, OverlayView, useJsApiLoader } from "@react-google-maps/api";
 
 const GoogleMapSection = () => {
 
@@ -84,7 +84,16 @@ const GoogleMapSection = () => {
               height: 30,
             },
           }}
-        />
+        >
+          <OverlayView
+            position={{ lat: source.lat, lng: source.lng }}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          >
+            <div className="p-2 bg-white font-bold inline-block">
+              <p className="text-black text-[16px]">{source.label}</p>
+            </div>
+          </OverlayView>
+        </MarkerF>
       ) : null}
       {destination.length != [] ? (
         <MarkerF
@@ -96,7 +105,16 @@ const GoogleMapSection = () => {
               height: 30,
             },
           }}
-        />
+        >
+          <OverlayView
+            position={{ lat: destination.lat, lng: destination.lng }}
+            mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          >
+            <div className="p-2 bg-white font-bold inline-block">
+              <p className="text-black text-[16px]">{destination.label}</p>
+            </div>
+          </OverlayView>
+        </MarkerF>
       ) : null}
       {/* Child components, such as markers, info windows, etc. */}
       <></>
