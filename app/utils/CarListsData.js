@@ -1,10 +1,12 @@
+
+
 export const CarListsData = [
   {
     id: 1,
     name: "Uber X",
     seat: "4",
     desc: "Affordable ,Everyday rides",
-    amount: 1.1,
+    amount: 30.0,
     Image: "/UberX_v1.png",
   },
   {
@@ -12,7 +14,7 @@ export const CarListsData = [
     name: "Comfortable",
     seat: "4",
     desc: "Newer cars with extra legroom",
-    amount: 1.6,
+    amount: 35.0,
     Image: "/UberComfort.png",
   },
   {
@@ -20,7 +22,7 @@ export const CarListsData = [
     name: "Uber XL",
     seat: "4",
     desc: "Affordable rides for the groups upto 6",
-    amount: 1.8,
+    amount: 40.0,
     Image: "/UberXL_New.png",
   },
   {
@@ -28,7 +30,7 @@ export const CarListsData = [
     name: "Uber Pet",
     seat: "4",
     desc: "Affordable rides for you and your pet",
-    amount: 2.0,
+    amount: 45.0,
     Image: "/UberX_Pet.png",
   },
   {
@@ -36,7 +38,7 @@ export const CarListsData = [
     name: "Black",
     seat: "4",
     desc: "Affordable ,Everyday rides",
-    amount: 1.2,
+    amount: 42.0,
     Image: "/Black_v1.png",
   },
 ];

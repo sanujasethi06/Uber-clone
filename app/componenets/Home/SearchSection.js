@@ -33,7 +33,7 @@ const SearchSection = () => {
         Search
       </button>
       </div>
-      {distance?<CarListOptions />:null}
+      {distance ? <CarListOptions distance={ distance} />:null}
     </div>
   );
 }

@@ -11,7 +11,7 @@ const GoogleMapSection = () => {
 
   const containerStyle = {
     width: "100%",
-    height:window.innerWidth*0.45
+    height:window.innerWidth*0.37
   };
 
   const [center ,setCenter] = useState({
