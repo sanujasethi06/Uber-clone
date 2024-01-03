@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import CarListItem from './CarListItem'
 import { CarListsData } from '@/app/utils/CarListsData'
+import { useRouter } from 'next/navigation'
 
 const CarListOptions = (  {distance}) => {
 
   const [activeIndex, setActiveIndex] = useState();
-  const [selectedCar,setSelectedCar] = useState();
+  const [selectedCar, setSelectedCar] = useState();
+  
+  const router = useRouter();
   return (
     <div className="mt-5 p-5 overflow-auto h-[300px] ">
       <h2 className="text-[22px] font-bold">Recommended</h2>
@@ -23,10 +26,11 @@ const CarListOptions = (  {distance}) => {
       ))}
       {selectedCar?.name?<div className='flex justify-between fixed bottom-5 bg-white p-3 shadow-xl w-full md:w-[30%] border-[1px] items-center rounded-lg'>
         <h2 className="">Make Payment For</h2>
-        <button className="p-3 bg-black text-white rounded-lg text-center">Request { selectedCar.name}</button>
+        <button className="p-3 bg-black text-white rounded-lg text-center"
+        onClick={()=>router.push('/payment?amount='+(selectedCar.amount*distance).toFixed(2))}>Request {selectedCar.name}</button>
       </div>:null}
     </div>
   );
 }
 
-export default CarListOptions
+export default CarListOptions 
