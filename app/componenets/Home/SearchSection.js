@@ -2,8 +2,8 @@
 
 import React, { useContext, useEffect ,useState} from 'react'
 import InputItem from './InputItem'
-import { SourceContext } from '@/app/context/SourceContext';
-import { DestinationContext } from '@/app/context/DestinationContext';
+import { SourceContext } from '../../context/SourceContext';
+import { DestinationContext } from '../../context/DestinationContext';
 import CarListOptions from './CarListOptions';
 const SearchSection = () => {
     const { source, setSource } = useContext(SourceContext);

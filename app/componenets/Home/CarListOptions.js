@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CarListItem from './CarListItem'
-import { CarListsData } from '@/app/utils/CarListsData'
 import { useRouter } from 'next/navigation'
+import { CarListsData } from '../../utils/CarListsData' 
 
 const CarListOptions = (  {distance}) => {
 

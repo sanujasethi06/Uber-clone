@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { DestinationContext } from "@/app/context/DestinationContext";
-import { SourceContext } from "@/app/context/SourceContext";
+import { SourceContext } from '../../context/SourceContext'; 
 import { useContext } from 'react';
 import { DirectionsRenderer, GoogleMap, MarkerF, OverlayView, useJsApiLoader } from "@react-google-maps/api";
+import { DestinationContext } from '../../context/DestinationContext';
 
 const GoogleMapSection = () => {
 

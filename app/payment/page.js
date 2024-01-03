@@ -8,8 +8,8 @@ import { loadStripe } from '@stripe/stripe-js';
 
 
 const Payment = () => {
-    const searchParams = useSearchParams();
-    const amount = searchParams.get('amount');
+    const searchParam = useSearchParams();
+    const amount = searchParam.get('amount');
 
     const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_API_KEY);
     const options = {
